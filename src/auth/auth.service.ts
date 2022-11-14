@@ -13,20 +13,28 @@ export class AuthService {
   async login(authLoginDto: AuthLoginDto): Promise<any> {
     const { email, password } = authLoginDto;
     const user = await this.usersService.getUser({ email });
-    if (!user) return new HttpException('USER_NOT_FOUND', 404);
+    if (!user)
+      return new HttpException('Este usuario no se encuentra registrado.', 404);
     const passwordValid = await bcrypt.compare(password, user.password);
-    if (!passwordValid) new HttpException('PASSWORD_INVALID', 403);
+    if (!passwordValid)
+      return new HttpException('La contraseña no coincide.', 403);
 
-    const payload = {
-      name: user.name,
-      email: user.email,
-      password: user.password,
-    };
-    const token = this.jwtService.sign(payload);
-    const data = {
-      user,
-      accessToken: token,
-    };
-    return data;
+    if (!user.isActive)
+      return new HttpException('Este usuario ya no está activo.', 403);
+
+    if (user && password) {
+      const payload = {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      };
+      const token = this.jwtService.sign(payload);
+      const data = {
+        user,
+        accessToken: token,
+        success: true,
+      };
+      return data;
+    }
   }
 }

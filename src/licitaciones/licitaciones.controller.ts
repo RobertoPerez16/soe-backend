@@ -22,6 +22,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class LicitacionesController {
   constructor(private readonly licitacionesService: LicitacionesService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createLicitacioneDto: CreateLicitacionDto) {
     return this.licitacionesService.create(createLicitacioneDto);
@@ -33,11 +34,13 @@ export class LicitacionesController {
     return this.licitacionesService.findAll(request);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.licitacionesService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(
     @Param('id') id: string,
