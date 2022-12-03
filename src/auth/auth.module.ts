@@ -17,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     PassportModule,
     JwtModule.register({
       secret: process.env.MONGO_JWT_SECRET,
-      signOptions: { expiresIn: '60m' },
+      signOptions: { expiresIn: `${process.env.JWT_TOKEN_EXPIRATION}m` },
     }),
   ],
   controllers: [AuthController],
