@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { LicitacionesModule } from './licitaciones/licitaciones.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     LicitacionesModule,
     UserModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
