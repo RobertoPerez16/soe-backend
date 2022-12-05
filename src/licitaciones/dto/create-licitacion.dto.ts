@@ -70,4 +70,9 @@ export class CreateLicitacionDto {
     example: 'Fulanito Pérez',
   })
   readonly createdUserBy: string;
+
+  @ApiProperty({
+    example: [],
+  })
+  readonly biddingDates: any[];
 }

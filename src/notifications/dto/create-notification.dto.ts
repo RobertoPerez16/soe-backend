@@ -15,4 +15,9 @@ export class CreateNotificationDto {
     example: 'user@user.com',
   })
   readonly createdBy: string;
+
+  @ApiProperty({
+    example: false,
+  })
+  readonly hasSeen: boolean;
 }

@@ -5,10 +5,10 @@ export type LicitacionDocument = Licitacion & Document;
 
 @Schema({ timestamps: true })
 export class Licitacion {
-  @Prop()
+  @Prop({ required: true })
   processNumber: string;
 
-  @Prop()
+  @Prop({ required: true })
   title: string;
 
   @Prop()
@@ -35,19 +35,19 @@ export class Licitacion {
   @Prop()
   description: string;
 
-  @Prop()
+  @Prop({ required: true })
   contractLength: number;
 
-  @Prop()
+  @Prop({ required: true })
   terminationDate: string;
 
   @Prop()
   conditionInstallment: string;
 
-  @Prop()
+  @Prop({ required: true })
   contractAddress: string;
 
-  @Prop()
+  @Prop({ required: true })
   estimatedValue: string;
 
   @Prop()
@@ -55,6 +55,9 @@ export class Licitacion {
 
   @Prop()
   createdUserBy: string;
+
+  @Prop()
+  biddingDates: any[];
 }
 
 export const LicitacionSchema = SchemaFactory.createForClass(Licitacion);

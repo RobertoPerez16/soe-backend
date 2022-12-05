@@ -21,6 +21,12 @@ export class UserCreationDto {
     example: true,
   })
   readonly isActive: boolean;
+
+  @ApiProperty({
+    example: 'Admin',
+  })
+  readonly rol: string;
+
   @ApiProperty({
     example: '123456',
   })

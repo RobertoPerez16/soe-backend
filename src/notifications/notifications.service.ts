@@ -6,6 +6,7 @@ import {
 } from './schema/notification.schema';
 import { Model } from 'mongoose';
 import { CreateNotificationDto } from './dto/create-notification.dto';
+import { UpdateNotificationDto } from './dto/update-licitacion.dto';
 
 @Injectable()
 export class NotificationsService {
@@ -20,5 +21,15 @@ export class NotificationsService {
 
   findAll() {
     return this.notificationModel.find().exec();
+  }
+
+  update(id: string, updateNotificationDto: UpdateNotificationDto) {
+    return this.notificationModel.findOneAndUpdate(
+      { _id: id },
+      updateNotificationDto,
+      {
+        new: true,
+      },
+    );
   }
 }

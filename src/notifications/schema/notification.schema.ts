@@ -13,6 +13,9 @@ export class Notification {
 
   @Prop()
   createdBy: string;
+
+  @Prop()
+  hasSeen: boolean;
 }
 
 export const NotificationSchema = SchemaFactory.createForClass(Notification);
