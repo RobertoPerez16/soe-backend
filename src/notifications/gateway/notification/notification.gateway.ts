@@ -9,7 +9,13 @@ import { Socket, Server } from 'socket.io';
 import { CreateNotificationDto } from '../../dto/create-notification.dto';
 import { NotificationsService } from '../../notifications.service';
 @WebSocketGateway({
-  cors: { origin: ['http://localhost:4200'] },
+  cors: {
+    origin: [
+      'http://localhost:4200',
+      'https://soe-enterprise-1c7cd.web.app',
+      'https://soe-enterprise-1c7cd.web.app/login',
+    ],
+  },
 })
 export class NotificationGateway
   implements OnGatewayConnection, OnGatewayDisconnect
