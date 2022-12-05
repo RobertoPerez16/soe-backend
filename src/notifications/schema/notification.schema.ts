@@ -16,6 +16,12 @@ export class Notification {
 
   @Prop()
   hasSeen: boolean;
+
+  @Prop({ required: true })
+  biddingId: string;
+
+  @Prop()
+  dateType: string;
 }
 
 export const NotificationSchema = SchemaFactory.createForClass(Notification);

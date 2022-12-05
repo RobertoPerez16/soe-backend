@@ -20,4 +20,14 @@ export class CreateNotificationDto {
     example: false,
   })
   readonly hasSeen: boolean;
+
+  @ApiProperty({
+    example: 'id of Licitations model',
+  })
+  readonly biddingId: string;
+
+  @ApiProperty({
+    example: 'observationsDraftSpecifications',
+  })
+  dateType: string;
 }
