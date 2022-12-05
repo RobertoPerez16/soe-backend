@@ -15,7 +15,7 @@ export class NotificationGateway
   implements OnGatewayConnection, OnGatewayDisconnect
 {
   @WebSocketServer() server: Server;
-  notifications: CreateNotificationDto[] = [];
+  notifications: any[] = [];
 
   constructor(private notificationService: NotificationsService) {}
 
@@ -24,13 +24,27 @@ export class NotificationGateway
     client: Socket,
     createNotificationDto: CreateNotificationDto,
   ) {
-    console.log('client: ', client.id);
     try {
       const response = await this.notificationService.create(
         createNotificationDto,
       );
 
       this.notifications.push(response);
+      this.server.emit('newNotification', this.notifications);
+    } catch (e) {
+      console.log('Error: ', e);
+      this.server.emit('newNotification', []);
+    }
+  }
+
+  @SubscribeMessage('updateNotification')
+  async updateNotification(client: Socket, id: string) {
+    try {
+      this.notifications = await this.notificationService.findAll();
+      const index = this.notifications.findIndex((n: any) => n._id == id);
+      if (index >= 0) {
+        this.notifications[index].hasSeen = true;
+      }
       this.server.emit('newNotification', this.notifications);
     } catch (e) {
       console.log('Error: ', e);
